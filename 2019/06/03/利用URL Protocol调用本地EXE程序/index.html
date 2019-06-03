@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>利用URL Protocol调用本地EXE程序 - Francois博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Francois,"> 
+    <meta name="description" content="每天进步一点点,
+在网上经常可以看到点击一个按钮或者一个连接直接打开QQ聊天框。这种方式都是通过URL Protocol方式实现的。URL Protocol它可以兼容各种浏览器。
+
+第一步：先注册URL PROTO,"> 
+    <meta name="author" content="Francois"> 
+    <link rel="alternative" href="atom.xml" title="Francois博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Francois博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://francoisfly.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">利用URL Protocol调用本地EXE程序</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">利用URL Protocol调用本地EXE程序</h1>
+        <div class="stuff">
+            <span>六月 03, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/URL-Protocol/">URL Protocol</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/regedit/">regedit</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <blockquote>
+<p>在网上经常可以看到点击一个按钮或者一个连接直接打开QQ聊天框。这种方式都是通过URL Protocol方式实现的。URL Protocol它可以兼容各种浏览器。</p>
+</blockquote>
+<h4 id="第一步：先注册URL-PROTOCOL"><a href="#第一步：先注册URL-PROTOCOL" class="headerlink" title="第一步：先注册URL PROTOCOL"></a>第一步：先注册URL PROTOCOL</h4><h5 id="方法一：新建一个扩展名为：reg的文件。"><a href="#方法一：新建一个扩展名为：reg的文件。" class="headerlink" title="方法一：新建一个扩展名为：reg的文件。"></a>方法一：新建一个扩展名为：<code>reg</code>的文件。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\openlayer] </span><br><span class="line">&quot;URL Protocol&quot;=&quot;D:\\Program Files\\openlayer\\openlayer.exe&quot;</span><br><span class="line">@=&quot;openlayer&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\openlayer\DefaultIcon]</span><br><span class="line">@=&quot;D:\\Program Files\\openlayer\\openlayer.exe\,1&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\openlayer\Shell]</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\openlayer\Shell\open]</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\openlayer\Shell\open\command]</span><br><span class="line">@=&quot;\&quot;D:\\Program Files\\openlayer\\openlayer.exe\&quot; \&quot;%1\&quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>第一行：注册表工具的版本信息。</p>
+<p>第二行：在注册表【HKEY_CLASSES_ROOT】节点下创建名为【openlayer】的节点。其中【openlayer】的名称就对应着自定义URL Protocol的名称，在web中调用的时候需要这个名称。</p>
+<p>第三行：x:\\x.exe 表示要打开程序的路径。</p>
+<p>第四行：协议的名称，可以是任意字符串，后面不会用到。</p>
+<p>第六行：x:\\x.exe也是对应的程序路径，后面的1照抄。</p>
+<p>第十行：x:\\x.exe也是对应的程序路径，其中%1表示到参数，参数可以在你的程序openlayer.exe中解析得到。</p>
+<p>保存之后双击该文件即可直接导入到注册表中。按下win + r 打开 输入<code>regedit</code>  即可打开注册表。</p>
+<p>在【HKEY_CLASSES_ROOT】节点下可以找到该【openlayer】的节点名称。</p>
+<p><img src="/images/4/1.png" alt></p>
+<h5 id="方法二：通过C-语句进行URL-Protocol注册"><a href="#方法二：通过C-语句进行URL-Protocol注册" class="headerlink" title="方法二：通过C#语句进行URL Protocol注册"></a>方法二：通过C#语句进行URL Protocol注册</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">static void Main(string[] args)</span><br><span class="line">&#123;</span><br><span class="line">    if (args.Length &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(args[0]);</span><br><span class="line">    &#125;</span><br><span class="line">    Console.WriteLine(&quot;-------操作--------&quot;);</span><br><span class="line">    Console.WriteLine(&quot;1、注册协议   请按1&quot;);</span><br><span class="line">    Console.WriteLine(&quot;2、卸载协议   请按2&quot;);</span><br><span class="line">    Console.WriteLine(&quot;请输入:&quot;);</span><br><span class="line">    if (Console.ReadLine() == &quot;1&quot;)</span><br><span class="line">        Reg();</span><br><span class="line">    else</span><br><span class="line">        UnReg();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 注册启动项到注册表</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public static void Reg()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(&quot;请输入程序路径:&quot;);</span><br><span class="line">    var inputPath = Console.ReadLine();</span><br><span class="line">    if (string.IsNullOrEmpty(inputPath))</span><br><span class="line">    &#123;</span><br><span class="line">        var exePath = Process.GetCurrentProcess().MainModule.FileName;</span><br><span class="line">        exePath = exePath.Substring(0, exePath.LastIndexOf(&quot;\\&quot;)) + &quot;\\Agent.exe&quot;;</span><br><span class="line">        if (File.Exists(exePath))</span><br><span class="line">        &#123;</span><br><span class="line">            //注册的协议头，即在地址栏中的路径 如QQ的：tencent://xxxxx/xxx 我注册的是swf 在地址栏中输入：swf:// 就能打开本程序</span><br><span class="line">            var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(&quot;swf&quot;);</span><br><span class="line">            //以下这些参数都是固定的，不需要更改，直接复制过去 </span><br><span class="line">            var shellKey = surekamKey.CreateSubKey(&quot;shell&quot;);</span><br><span class="line">            var openKey = shellKey.CreateSubKey(&quot;open&quot;);</span><br><span class="line">            var commandKey = openKey.CreateSubKey(&quot;command&quot;);</span><br><span class="line">            surekamKey.SetValue(&quot;URL Protocol&quot;, &quot;&quot;);</span><br><span class="line">            commandKey.SetValue(&quot;&quot;, &quot;\&quot;&quot; + exePath + &quot;\&quot;&quot; + &quot; \&quot;%1\&quot;&quot;);</span><br><span class="line">            Console.WriteLine(&quot;注册成功&quot;);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;默认程序【Agent.exe】不存在！&quot;);</span><br><span class="line">            Reg();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(&quot;swf&quot;);</span><br><span class="line">        //以下这些参数都是固定的，不需要更改，直接复制过去 </span><br><span class="line">        var shellKey = surekamKey.CreateSubKey(&quot;shell&quot;);</span><br><span class="line">        var openKey = shellKey.CreateSubKey(&quot;open&quot;);</span><br><span class="line">        var commandKey = openKey.CreateSubKey(&quot;command&quot;);</span><br><span class="line">        surekamKey.SetValue(&quot;URL Protocol&quot;, &quot;&quot;);</span><br><span class="line">        //这里可执行文件取当前程序全路径，可根据需要修改</span><br><span class="line">        // var exePath = Process.GetCurrentProcess().MainModule.FileName;</span><br><span class="line">        commandKey.SetValue(&quot;&quot;, &quot;\&quot;&quot; + inputPath + &quot;\&quot;&quot; + &quot; \&quot;%1\&quot;&quot;);</span><br><span class="line">        Console.WriteLine(&quot;注册成功&quot;);</span><br><span class="line">        Console.ReadKey();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 取消注册</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public static void UnReg()</span><br><span class="line">&#123;</span><br><span class="line">    //直接删除节点</span><br><span class="line">    Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(&quot;swf&quot;);</span><br><span class="line">    //Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(&quot;jun&quot;);</span><br><span class="line">    Console.WriteLine(&quot;卸载成功&quot;);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="第二步：应用"><a href="#第二步：应用" class="headerlink" title="第二步：应用"></a>第二步：应用</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cn"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>index<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"openlayer://"</span>&gt;</span>打开本地程序<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>传递参数</p>
+<blockquote>
+<p>传递参数：写注册表的时候，最后路径要加上参数<code>[HKEY_CLASSES_ROOT\openlayer\shell\open\command]</code></p>
+<p><code>@=&quot;\&quot;C:\\WINDOWS\\NOTEPAD.EXE\&quot; \&quot;%1\&quot;&quot;</code></p>
+</blockquote>
+<p>1)、以C#为例，在程序的主入口加入参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static void Main(string[] args)</span><br><span class="line">&#123;</span><br><span class="line">    if (args.Length &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">       Console.WriteLine(args[0].ToString());</span><br><span class="line">    &#125;            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）、在写链接的时候自定义参数，程序会把整个链接都获取到，需要自己在进行解析。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"openlayer://msg"</span>&gt;</span>打开本地程序<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>程序会输出一下结果：<code>openlayer://msg</code></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="https://link.hhtjim.com/163/1359356908.mp3"></li>
+                    
+                        <li title="1" data-url="https://link.hhtjim.com/163/862099032.mp3"></li>
+                    
+                        <li title="2" data-url="https://link.hhtjim.com/163/1334647784.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+       
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
